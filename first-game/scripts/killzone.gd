@@ -4,9 +4,12 @@ extends Area2D
 
 func _on_body_entered(body: Node2D) -> void:
 	print("Player has Died")
+	Engine.time_scale = 0.5
+	body.get_node("CollisionShape2D").queue_free() #remove collsion when death
 	timer.start()
 	
 
 #When the player dies a few second timer plays, after restart the scene
 func _on_timer_timeout() -> void:
+	Engine.time_scale = 1
 	get_tree().reload_current_scene()
